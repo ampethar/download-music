@@ -41,8 +41,10 @@ function isSpotifyUrl(url) {
 }
 
 function checkDependency(cmd, name, installHint) {
+  const finder = os.platform() === "win32" ? "where" : "which";
+
   try {
-    execSync(`which ${cmd}`, { stdio: "ignore" });
+    execSync(`${finder} ${cmd}`, { stdio: "ignore" });
     return true;
   } catch {
     console.error(
